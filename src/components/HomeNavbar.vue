@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-orange-400 h-11 rounded-md">
+  <nav class="bg-orange-400 h-11 rounded-sm">
     <div class="max-w-screen px-2 py-2">
       <div class="flex items-center">
         <ul class="flex flex-row mr-6 space-x-8">

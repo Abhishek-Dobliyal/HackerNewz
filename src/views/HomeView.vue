@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto my-1">
     <HomeNavbar></HomeNavbar>
     <Spinner v-if="this.$store.getters.getPosts.length == 0"></Spinner>
     <div class="container p-2" v-else>
@@ -44,6 +44,7 @@
 import HomeNavbar from "@/components/HomeNavbar.vue";
 import HomePostContainer from "@/components/HomePostContainer.vue";
 import Spinner from "@/components/Spinner.vue";
+import axios from "axios";
 
 export default {
   name: "HomeView",
@@ -55,7 +56,7 @@ export default {
   data() {
     return {
       current: 1,
-      pageSize: 10,
+      pageSize: 11,
     };
   },
   computed: {
@@ -83,8 +84,11 @@ export default {
       this.current--;
     },
   },
-  mounted() {
-    this.$store.dispatch("fetchLatestPost");
+  created() {
+    axios.get(this.$store.getters.getHomePageApiURL).then((res) => {
+      let totalPages = res.data.nbPages;
+      this.$store.dispatch("fetchLatestPost", totalPages);
+    });
   },
 };
 </script>
