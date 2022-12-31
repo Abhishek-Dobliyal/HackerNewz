@@ -2,7 +2,7 @@ import { createStore } from "vuex";
 import axios from "axios";
 
 const api =
-  "https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=2";
+  "https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=15";
 
 export default createStore({
   state: {

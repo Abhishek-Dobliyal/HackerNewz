@@ -1,5 +1,5 @@
 <template>
-  <div class="container bg-gray-200 px-5 py-1 space-x-0.5">
+  <div class="container bg-gray-200 px-5 py-1 space-x-0.5 rounded-sm my-1.5">
     <a class="font-bold text-sm" :href="url"
       >{{ title }}
       <span class="text-xs text-gray-600 font-bold hover:underline"
@@ -12,7 +12,6 @@
         <span class="italic">{{ author }}</span> |
         <span>{{ numComments }} comments</span> |
         <span>Created at {{ createdAt }}</span>
-
       </div>
     </div>
   </div>
@@ -31,6 +30,9 @@ export default {
   },
   computed: {
     extractHostName() {
+      if (this.url == null) {
+        return "no url for this post";
+      }
       let url = new URL(this.url);
       return url.hostname + url.pathname;
     },
