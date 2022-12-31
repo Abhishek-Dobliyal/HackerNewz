@@ -4,13 +4,13 @@
       <div class="flex items-center">
         <ul class="flex flex-row mr-6 space-x-8">
           <li>
-            <a href="#" class="text-black font-bold" aria-current="page"
+            <a href="/" class="text-black font-bold" aria-current="page"
               >HackerNews Clone</a
             >
           </li>
           <li>
             <a
-              href="#"
+              href="/"
               class="text-black hover:underline text-sm"
               aria-current="page"
               >News</a
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "HomeNavbar",
+};
 </script>
-
-<style></style>
