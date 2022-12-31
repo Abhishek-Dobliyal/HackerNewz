@@ -6,6 +6,7 @@ export default createStore({
     posts: [],
     homePageApi: "https://hn.algolia.com/api/v1/search?tags=front_page&page=",
     searchPageApi: "https://hn.algolia.com/api/v1/search?tags=front_page&page=",
+    searchFilters: {},
   },
   getters: {
     getPosts(state) {
