@@ -10,7 +10,7 @@ A clone of the [HackerNews](https://news.ycombinator.com/newest) website.
 
 ## Usage
 
-- Open Terminal/ Command Prompt, then navigate to the `frontend` directory and type in:
+- Open Terminal/ Command Prompt, then navigate to the `project` directory and type in:
 
 ```bash
 npm run serve
