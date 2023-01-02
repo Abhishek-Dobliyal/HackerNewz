@@ -5,7 +5,7 @@
         <ul class="flex flex-row mr-6 space-x-8">
           <li>
             <a href="/" class="text-black font-bold" aria-current="page"
-              >HackerNews Clone</a
+              >HackerNewz</a
             >
           </li>
           <li>
