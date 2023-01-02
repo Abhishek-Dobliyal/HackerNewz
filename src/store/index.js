@@ -7,8 +7,8 @@ export default createStore({
     searchPosts: [],
     searchPostsCopy: [],
     urls: {
-      homePageApi: "http://hn.algolia.com/api/v1/search?tags=front_page&page=",
-      searchPageApi: "http://hn.algolia.com/api/v1/search?page=",
+      homePageApi: "https://hn.algolia.com/api/v1/search?tags=front_page&page=",
+      searchPageApi: "https://hn.algolia.com/api/v1/search?page=",
     },
   },
   getters: {
