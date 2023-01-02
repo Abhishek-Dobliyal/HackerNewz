@@ -19,7 +19,7 @@
                   placeholder="Search stories here..."
                   aria-label="Search"
                   aria-describedby="button-addon2"
-                  v-model="this.$store.state.searchFilters.query"
+                  v-model="query"
                 />
               </div>
             </div>
@@ -33,5 +33,31 @@
 <script>
 export default {
   name: "SearchNavbar",
+  data() {
+    return {
+      query: "",
+    };
+  },
+  updated() {
+    if (this.query.length == 0) {
+      this.$store.commit("updatedSearchRecords", []);
+      return;
+    }
+    let filtered = [];
+    console.log(this.query.split(" "));
+    for (let q of this.query.split(" ")) {
+      let curr = this.$store.getters.getSearchPostsCopy.filter(function (p) {
+        return (
+          p.author.toLowerCase().includes(q.toLowerCase()) ||
+          p.title.toLowerCase().includes(q.toLowerCase())
+        );
+      });
+      if (curr.length > 0) {
+        filtered.push(...curr)
+      }
+    }
+
+    this.$store.commit("updatedSearchRecords", filtered);
+  },
 };
 </script>

@@ -5,14 +5,10 @@ export default createStore({
   state: {
     homePosts: [],
     searchPosts: [],
+    searchPostsCopy: [],
     urls: {
       homePageApi: "http://hn.algolia.com/api/v1/search?tags=front_page&page=",
       searchPageApi: "http://hn.algolia.com/api/v1/search?page=",
-    },
-    searchFilters: {
-      query: "",
-      timeStamp: "",
-      sortBy: "",
     },
   },
   getters: {
@@ -25,6 +21,9 @@ export default createStore({
     getUrls(state) {
       return state.urls;
     },
+    getSearchPostsCopy(state) {
+      return state.searchPostsCopy;
+    },
   },
   mutations: {
     addHomePost(state, payload) {
@@ -34,7 +33,10 @@ export default createStore({
       state.searchPosts.push(payload);
     },
     updatedSearchRecords(state, payload) {
-      state.searchPosts = payload.length > 0 ? [...payload] : state.searchPosts;
+      state.searchPosts = payload.length > 0 ? payload : state.searchPostsCopy;
+    },
+    addPostToCopy(state, payload) {
+      state.searchPostsCopy.push(payload);
     },
   },
   actions: {
@@ -60,6 +62,9 @@ export default createStore({
               currPost["author"] = post.author;
 
               state.commit(addPost, currPost);
+              if (postFor == 0) {
+                state.commit("addPostToCopy", currPost);
+              }
             }
           });
         }
