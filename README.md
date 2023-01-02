@@ -1,6 +1,8 @@
 # HackerNewz
 A clone of the [HackerNews](https://news.ycombinator.com/newest) website.
 
+![](./public/hn_demo.gif)
+
 ## Installations and Dependencies
 
 - [NodeJS](https://nodejs.org/en/) Installed.
