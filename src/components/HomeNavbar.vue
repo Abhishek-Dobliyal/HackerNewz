@@ -10,15 +10,17 @@
           </li>
           <li>
             <a
-              href="/"
-              class="text-black hover:underline text-sm"
+              class="text-black hover:underline text-sm cursor-pointer"
+              @click="this.$router.push('/')"
               aria-current="page"
               >News</a
             >
           </li>
           <span>|</span>
           <li>
-            <a href="/search" class="text-black hover:underline text-sm"
+            <a
+              @click="this.$router.push('/search')"
+              class="text-black hover:underline text-sm cursor-pointer"
               >Search</a
             >
           </li>

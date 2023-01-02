@@ -1,17 +1,17 @@
 <template>
   <div class="container mx-auto my-1">
     <HomeNavbar></HomeNavbar>
-    <Spinner v-if="this.$store.getters.getPosts.length == 0"></Spinner>
+    <Spinner v-if="paginated.length == 0"></Spinner>
     <div class="container p-2" v-else>
       <ul v-for="item in paginated" :key="item">
-        <HomePostContainer
+        <PostContainer
           :title="item.title"
           :author="item.author"
           :numComments="item.numComments"
           :points="item.points"
           :url="item.url"
           :createdAt="item.createdAt"
-        ></HomePostContainer>
+        ></PostContainer>
       </ul>
 
       <div class="flex rounded-md shadow-sm justify-center my-2" role="group">
@@ -42,15 +42,14 @@
 
 <script>
 import HomeNavbar from "@/components/HomeNavbar.vue";
-import HomePostContainer from "@/components/HomePostContainer.vue";
+import PostContainer from "@/components/PostContainer.vue";
 import Spinner from "@/components/Spinner.vue";
-import axios from "axios";
 
 export default {
   name: "HomeView",
   components: {
     HomeNavbar,
-    HomePostContainer,
+    PostContainer,
     Spinner,
   },
   data() {
@@ -67,7 +66,7 @@ export default {
       return this.indexStart + this.pageSize;
     },
     paginated() {
-      return this.$store.getters.getPosts.slice(this.indexStart, this.indexEnd);
+      return this.$store.getters.getHomePosts.slice(this.indexStart, this.indexEnd);
     },
     isPrevDisabled() {
       return this.current <= 1;
@@ -85,10 +84,7 @@ export default {
     },
   },
   created() {
-    axios.get(this.$store.getters.getHomePageApiURL).then((res) => {
-      let totalPages = res.data.nbPages;
-      this.$store.dispatch("fetchLatestPost", totalPages);
-    });
+    this.$store.dispatch("fetchPosts", 1); // 1 for Home 
   },
 };
 </script>

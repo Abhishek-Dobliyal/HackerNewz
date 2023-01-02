@@ -3,46 +3,67 @@ import axios from "axios";
 
 export default createStore({
   state: {
-    posts: [],
-    homePageApi: "https://hn.algolia.com/api/v1/search?tags=front_page&page=",
-    searchPageApi: "https://hn.algolia.com/api/v1/search?tags=front_page&page=",
-    searchFilters: {},
+    homePosts: [],
+    searchPosts: [],
+    urls: {
+      homePageApi: "http://hn.algolia.com/api/v1/search?tags=front_page&page=",
+      searchPageApi: "http://hn.algolia.com/api/v1/search?page=",
+    },
+    searchFilters: {
+      query: "",
+      timeStamp: "",
+      sortBy: "",
+    },
   },
   getters: {
-    getPosts(state) {
-      return state.posts;
+    getHomePosts(state) {
+      return state.homePosts;
     },
-    getHomePageApiURL(state) {
-      return state.homePageApi;
+    getSearchPosts(state) {
+      return state.searchPosts;
     },
-    getSearchPageApiURL(state) {
-      return state.searchPageApi;
+    getUrls(state) {
+      return state.urls;
     },
   },
   mutations: {
-    addPost(state, payload) {
-      state.posts.push(payload);
+    addHomePost(state, payload) {
+      state.homePosts.push(payload);
+    },
+    addSearchPost(state, payload) {
+      state.searchPosts.push(payload);
+    },
+    updatedSearchRecords(state, payload) {
+      state.searchPosts = payload.length > 0 ? [...payload] : state.searchPosts;
     },
   },
   actions: {
-    fetchLatestPost(state, totalPages) {
-      for (let page = 1; page <= totalPages; page++) {
-        axios.get(this.getters.getHomePageApiURL + page).then((res) => {
-          let fetchedPosts = res.data.hits;
-          console.log(page);
-          for (const post of fetchedPosts) {
-            let currPost = {};
-            currPost["title"] = post.title || "No Title";
-            currPost["url"] = post.url;
-            currPost["numComments"] = post.num_comments || 0;
-            currPost["points"] = post.points || 0;
-            currPost["createdAt"] = post.created_at;
-            currPost["author"] = post.author;
+    fetchPosts(state, postFor) {
+      let url = postFor
+        ? this.getters.getUrls.homePageApi
+        : this.getters.getUrls.searchPageApi;
+      let addPost = postFor ? "addHomePost" : "addSearchPost";
 
-            state.commit("addPost", currPost);
-          }
-        });
-      }
+      axios.get(url).then((res) => {
+        let totalPages = res.data.nbPages;
+
+        for (let page = 1; page <= totalPages; page++) {
+          axios.get(url + page).then((res) => {
+            let fetchedPosts = res.data.hits;
+            for (const post of fetchedPosts) {
+              let currPost = {};
+              currPost["title"] = post.title || "No Title";
+              currPost["url"] = post.url;
+              currPost["numComments"] = post.num_comments || 0;
+              currPost["points"] = post.points || 0;
+              currPost["createdAt"] = post.created_at;
+              currPost["author"] = post.author;
+
+              state.commit(addPost, currPost);
+            }
+          });
+        }
+      });
     },
   },
   modules: {},

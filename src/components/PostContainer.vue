@@ -1,5 +1,7 @@
 <template>
-  <div class="container bg-gray-200 px-5 py-1 space-x-0.5 rounded-sm my-1.5">
+  <div
+    class="container bg-gray-200 px-5 py-2.5 space-x-0.5 rounded-sm my-1.5 truncate"
+  >
     <a class="font-bold text-sm" :href="url"
       >{{ title }}
       <span class="text-xs text-gray-600 font-bold hover:underline"
@@ -19,7 +21,7 @@
 
 <script>
 export default {
-  name: "HomePostContainer",
+  name: "PostContainer",
   props: {
     title: String,
     author: String,
@@ -30,7 +32,7 @@ export default {
   },
   computed: {
     extractHostName() {
-      if (this.url == null) {
+      if (this.url == null || this.url == "") {
         return "no url for this post";
       }
       let url = new URL(this.url);

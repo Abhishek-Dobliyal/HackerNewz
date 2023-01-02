@@ -5,7 +5,7 @@
         <ul class="flex flex-row space-x-5 items-center">
           <li>
             <span class="text-black font-bold" aria-current="page"
-              >Search HackerNews Clone</span
+              >Search HackerNews</span
             >
           </li>
           <li>
@@ -19,15 +19,9 @@
                   placeholder="Search stories here..."
                   aria-label="Search"
                   aria-describedby="button-addon2"
+                  v-model="this.$store.state.searchFilters.query"
                 />
               </div>
-              <button
-                class="btn inline-block px-2.5 py-2 border border-gray-400 text-gray-500 text-xs font-bold rounded bg-white ml-3"
-                type="button"
-                id="button-addon3"
-              >
-                Search
-              </button>
             </div>
           </li>
         </ul>
