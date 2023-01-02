@@ -5,7 +5,7 @@
         <ul class="flex flex-row space-x-5 items-center">
           <li>
             <span class="text-black font-bold" aria-current="page"
-              >Search HackerNews</span
+              >Search HackerNewz</span
             >
           </li>
           <li>
