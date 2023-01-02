@@ -1,4 +1,5 @@
-# greatvibes-assignment
+# HackerNewz
+A clone of the [HackerNews](https://news.ycombinator.com/newest) website.
 
 ## Project setup
 ```
